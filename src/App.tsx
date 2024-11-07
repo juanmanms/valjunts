@@ -26,7 +26,7 @@ function App() {
       if (error) throw error;
       setBusinesses(data || []);
     } catch (error) {
-      console.error('Error fetching businesses:', error);
+      console.error('Error fetching businesse:', error);
     } finally {
       setLoading(false);
     }
