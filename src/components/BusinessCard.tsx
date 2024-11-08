@@ -15,6 +15,12 @@ interface BusinessCardProps {
 }
 
 export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
+  const formatWebsite = (url: string) => {
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      return `http://${url}`;
+    }
+    return url;
+  };
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       {business.image && (
@@ -47,7 +53,7 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
               <div className="flex items-center text-gray-600">
                 <Globe className="w-4 h-4 mr-2" />
                 <a
-                  href={business.website}
+                  href={formatWebsite(business.website)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-blue-600"
