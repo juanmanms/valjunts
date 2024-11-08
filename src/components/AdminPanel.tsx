@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { Check, X } from 'lucide-react';
 
+import { Login } from './Login';
+
 interface Business {
   id: number;
   name: string;
@@ -18,6 +20,24 @@ interface Business {
 export const AdminPanel = () => {
   const [businesses, setBusinesses] = useState<Business[]>([]);
   const [loading, setLoading] = useState(true);
+  const [session, setSession] = useState<any>(null);
+
+  useEffect(() => {
+    const getSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setSession(session);
+    };
+
+    getSession();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     fetchPendingBusinesses();
@@ -67,6 +87,9 @@ export const AdminPanel = () => {
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
+  }
+  if (!session) {
+    return <Login />;
   }
 
   return (
@@ -127,11 +150,10 @@ export const AdminPanel = () => {
 
               {business.status !== 'pending' && (
                 <span
-                  className={`px-3 py-1 rounded-full text-sm font-medium ${
-                    business.status === 'approved'
-                      ? 'bg-green-100 text-green-800'
-                      : 'bg-red-100 text-red-800'
-                  }`}
+                  className={`px-3 py-1 rounded-full text-sm font-medium ${business.status === 'approved'
+                    ? 'bg-green-100 text-green-800'
+                    : 'bg-red-100 text-red-800'
+                    }`}
                 >
                   {business.status === 'approved' ? 'Aprobado' : 'Rechazado'}
                 </span>
