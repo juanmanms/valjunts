@@ -62,13 +62,7 @@ function App() {
                   <Building2 className="w-5 h-5 mr-1" />
                   Directorio
                 </Link>
-                <Link
-                  to="/admin"
-                  className="flex items-center px-3 py-2 text-sm font-medium text-gray-900 hover:text-blue-600"
-                >
-                  <UserCog className="w-5 h-5 mr-1" />
-                  Admin
-                </Link>
+
               </div>
             </div>
           </div>

@@ -20,9 +20,9 @@ export const LandingHero = () => {
             Unidos por Valencia
           </h1>
           <p className="mt-6 text-xl text-blue-100">
-            Directorio gratuito para apoyar a los negocios y autónomos afectados por la DANA
+            Directorio gratuito para apoyar a los pequeñas empresas y autónomos afectados por la DANA
           </p>
-          
+
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/registro"
@@ -81,7 +81,7 @@ export const LandingHero = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900">¿Cómo Funciona?</h2>
           </div>
-          
+
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="flex items-center mb-4">
@@ -94,7 +94,7 @@ export const LandingHero = () => {
                 Completa el formulario con los datos de tu negocio afectado por la DANA.
               </p>
             </div>
-            
+
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="flex items-center mb-4">
                 <div className="bg-blue-100 rounded-full p-2">
@@ -106,7 +106,7 @@ export const LandingHero = () => {
                 Verificamos tu información para garantizar la autenticidad del directorio.
               </p>
             </div>
-            
+
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="flex items-center mb-4">
                 <div className="bg-blue-100 rounded-full p-2">
