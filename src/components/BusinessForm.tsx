@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { supabase } from '../lib/supabase';
+import { municipios, Municipio } from '../constants/municipios';
 
 interface FormData {
   name: string;
@@ -11,6 +12,7 @@ interface FormData {
   website: string;
   image: string;
   address: string;
+  municipio: Municipio;
 }
 
 export const BusinessForm = () => {
@@ -32,7 +34,6 @@ export const BusinessForm = () => {
       reset();
     } catch (error) {
       setMessage('Ha ocurrido un error. Por favor, inténtalo de nuevo.');
-      console.error('Error submitting business:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -41,9 +42,9 @@ export const BusinessForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-2xl mx-auto p-8 bg-white rounded-lg shadow-lg"
+      className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md"
     >
-      <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+      <h2 className="text-2xl font-bold text-gray-900 mb-6">
         Registra tu Negocio
       </h2>
 
@@ -147,21 +148,39 @@ export const BusinessForm = () => {
 
         <div>
           <label htmlFor="address" className="block text-sm font-medium text-gray-700">
-            Dirección *
+            Dirección
           </label>
           <input
             type="text"
             id="address"
-            {...register('address', { required: 'Este campo es obligatorio' })}
+            {...register('address')}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
           {errors.address && <p className="text-red-600">{errors.address.message}</p>}
         </div>
 
+        <div>
+          <label htmlFor="municipio" className="block text-sm font-medium text-gray-700">
+            Municipio *
+          </label>
+          <select
+            id="municipio"
+            {...register('municipio', { required: 'Este campo es obligatorio' })}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          >
+            {municipios.map((municipio) => (
+              <option key={municipio} value={municipio}>
+                {municipio.length > 30 ? `${municipio.substring(0, 30)}...` : municipio}
+              </option>
+            ))}
+          </select>
+          {errors.municipio && <p className="text-red-600">{errors.municipio.message}</p>}
+        </div>
+
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-blue-300"
+          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-blue-300"
         >
           {isSubmitting ? 'Enviando...' : 'Enviar Solicitud'}
         </button>

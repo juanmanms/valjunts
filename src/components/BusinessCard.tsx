@@ -21,15 +21,17 @@ export const BusinessCard: React.FC<BusinessCardProps> = ({ business }) => {
     }
     return url;
   };
+  const defaultImage = 'https://www.shutterstock.com/image-vector/image-icon-600nw-211642900.jpg';
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      {business.image && (
-        <img
-          src={business.image}
-          alt={business.name}
-          className="w-full h-48 object-cover"
-        />
-      )}
+
+      <img
+        src={business.image || defaultImage}
+        alt={business.name}
+        className="w-full h-48 object-cover"
+      />
+
       <div className="p-6">
         <h3 className="text-xl font-bold text-gray-900 mb-2">{business.name}</h3>
         <p className="text-gray-600 mb-4">{business.description}</p>
