@@ -11,6 +11,7 @@ export const Login = () => {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) {
             setError(error.message);
+            console.error('Error logging in:', error.message);
         } else {
             window.location.href = '/admin';
         }
